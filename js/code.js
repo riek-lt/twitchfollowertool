@@ -1,8 +1,8 @@
 var csvContents = [];
 var accountInfo = [];
 var i, j = 0;
-var jsonList;
-var previousList = "";
+var newFollowList;
+var oldFollowList = "";
 var previousFollowerTotal = document.getElementById('previousFollowerTotal');
 var newFollowerTotal = document.getElementById('newFollowerTotal');
 
@@ -11,22 +11,23 @@ prepare();
 
 
 function prepare() {
-  previousList = JSON.parse(localStorage.getItem('previousList'));
-previousFollowerTotal.innerHTML = "your previous amount of followers was <b>" + previousList.length + "</b>";
+  oldFollowList = JSON.parse(localStorage.getItem('previousList'));
+previousFollowerTotal.innerHTML = "your previous amount of followers was <b>" + oldFollowList.length + "</b>";
 }
 
 
 function processing() {
-newFollowerTotal.innerHTML = "your new amount of followers was <b>" + jsonList.length + "</b>";
+newFollowerTotal.innerHTML = "your new amount of followers was <b>" + newFollowList.length + "</b>";
+
 }
 
 function placeFileContent(target, file) {
   readFileContent(file).then(content => {
     target.value = content;
 
-    jsonList = csvJSON(content);
-    localStorage.setItem('previousList', jsonList.toString());
-    jsonList = JSON.parse(jsonList);
+    newFollowList = csvJSON(content);
+    localStorage.setItem('previousList', newFollowList.toString());
+    newFollowList = JSON.parse(newFollowList);
 
 processing();
   }).catch(error => console.log(error))
