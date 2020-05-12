@@ -1,4 +1,4 @@
-var lines = [];
+var csvContents = [];
 var accountInfo = [];
 var i=0;
 
@@ -18,9 +18,9 @@ function placeFileContent(target, file) {
 	readFileContent(file).then(content => {
   	target.value = content
 
-lines = content.split('\n');
-for (i=0; i < lines.length; i++) {
-  accountInfo = lines[i].split(',');
+csvContents = content.split('\n');
+for (i=0; i < csvContents.length; i++) {
+  accountInfo = csvContents[i].split(',');
   console.log(accountInfo[0]);
 }
 
