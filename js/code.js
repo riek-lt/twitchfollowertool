@@ -1,4 +1,6 @@
-
+var lines = [];
+var accountInfo = [];
+var i=0;
 
 document.getElementById('input-file')
   .addEventListener('change', getFile)
@@ -15,6 +17,13 @@ function getFile(event) {
 function placeFileContent(target, file) {
 	readFileContent(file).then(content => {
   	target.value = content
+
+lines = content.split('\n');
+for (i=0; i < lines.length; i++) {
+  accountInfo = lines[i].split(',');
+  console.log(accountInfo[0]);
+}
+
   }).catch(error => console.log(error))
 }
 
