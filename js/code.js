@@ -4,14 +4,20 @@ var i, j = 0;
 var jsonList;
 var previousList = "";
 var previousFollowerTotal = document.getElementById('previousFollowerTotal');
+var newFollowerTotal = document.getElementById('newFollowerTotal');
 
-main();
+prepare();
 
 
 
-function main() {
+function prepare() {
   previousList = JSON.parse(localStorage.getItem('previousList'));
 previousFollowerTotal.innerHTML = "your previous amount of followers was <b>" + previousList.length + "</b>";
+}
+
+
+function processing() {
+newFollowerTotal.innerHTML = "your new amount of followers was <b>" + jsonList.length + "</b>";
 }
 
 function placeFileContent(target, file) {
@@ -22,7 +28,7 @@ function placeFileContent(target, file) {
     localStorage.setItem('previousList', jsonList.toString());
     jsonList = JSON.parse(jsonList);
 
-
+processing();
   }).catch(error => console.log(error))
 }
 //Don't actually do stuff beneath this line
