@@ -3,22 +3,46 @@ var accountInfo = [];
 var i, j = 0;
 var newFollowList;
 var oldFollowList = "";
+var difference = {};
+var difference2 = {};
 var previousFollowerTotal = document.getElementById('previousFollowerTotal');
 var newFollowerTotal = document.getElementById('newFollowerTotal');
+var leavers = document.getElementById('leavers');
+var joiners = document.getElementById('joiners');
 
-prepare(); //Expected output: Pear gone, cucumber new
+prepare(); //Expected output: Pear goner, cucumber new
 
 function prepare() {
   oldFollowList = JSON.parse(localStorage.getItem('previousList'));
-previousFollowerTotal.innerHTML = "your previous amount of followers was <b>" + oldFollowList.length + "</b>";
+  previousFollowerTotal.innerHTML = "your previous amount of followers was <b>" + oldFollowList.length + "</b>";
 }
 
 
 function processing() {
-newFollowerTotal.innerHTML = "your new amount of followers was <b>" + newFollowList.length + "</b>";
-
-
+  newFollowerTotal.innerHTML = "your new amount of followers was <b>" + newFollowList.length + "</b>";
+  getLeavers();
+  getJoiners();
 }
+
+function getLeavers() {
+  // difference =  oldFollowList.userName.filter(x => newFollowList.userName.indexOf(x) === -1);
+  difference = compareJSON(oldFollowList, newFollowList);
+  for (i = 0; i < difference.length; i++) {
+    leavers.innerHTML += i + ": " + difference[i].userName + "<br>";
+  }
+}
+
+function getJoiners() {
+  difference2 = compareJSON(newFollowList, oldFollowList);
+  for (i = 0; i < difference2.length; i++) {
+    joiners.innerHTML += i + ": " + difference2[i].userName + "<br>";
+  }
+}
+
+var compareJSON = function(obj1, obj2) {
+  return obj1.filter((i => a => a.userName !== obj2[i].userName || !++i)(0));
+};
+
 
 function placeFileContent(target, file) {
   readFileContent(file).then(content => {
@@ -27,8 +51,7 @@ function placeFileContent(target, file) {
     newFollowList = csvJSON(content);
     localStorage.setItem('previousList', newFollowList.toString());
     newFollowList = JSON.parse(newFollowList);
-
-processing();
+    processing();
   }).catch(error => console.log(error))
 }
 //Don't actually do stuff beneath this line
