@@ -6,9 +6,7 @@ var oldFollowList = "";
 var previousFollowerTotal = document.getElementById('previousFollowerTotal');
 var newFollowerTotal = document.getElementById('newFollowerTotal');
 
-prepare();
-
-
+prepare(); //Expected output: Pear gone, cucumber new
 
 function prepare() {
   oldFollowList = JSON.parse(localStorage.getItem('previousList'));
@@ -18,6 +16,7 @@ previousFollowerTotal.innerHTML = "your previous amount of followers was <b>" + 
 
 function processing() {
 newFollowerTotal.innerHTML = "your new amount of followers was <b>" + newFollowList.length + "</b>";
+
 
 }
 
