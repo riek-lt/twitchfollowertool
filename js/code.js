@@ -2,27 +2,29 @@ var csvContents = [];
 var accountInfo = [];
 var i, j = 0;
 var jsonList;
+var previousList = "";
+var previousFollowerTotal = document.getElementById('previousFollowerTotal');
+
+main();
+
+
+
+function main() {
+  previousList = JSON.parse(localStorage.getItem('previousList'));
+previousFollowerTotal.innerHTML = "your previous amount of followers was <b>" + previousList.length + "</b>";
+}
 
 function placeFileContent(target, file) {
   readFileContent(file).then(content => {
     target.value = content;
 
     jsonList = csvJSON(content);
+    localStorage.setItem('previousList', jsonList.toString());
     jsonList = JSON.parse(jsonList);
 
-    // console.log(jsonList[0].userName);
 
-    csvContents = content.split('\n');
-    for (i = 1; i < csvContents.length; i++) {
-      accountInfo = csvContents[i].split(',');
-      console.log(accountInfo[0]);
-    }
   }).catch(error => console.log(error))
 }
-
-
-
-
 //Don't actually do stuff beneath this line
 
 function readFileContent(file) {
