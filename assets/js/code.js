@@ -12,6 +12,8 @@ var joiners = document.getElementById('joiners');
 var tableDiv = document.getElementById('tableDiv');
 var uploadBtn = document.getElementById('uploadBtn');
 var newtimer = document.getElementById('newtimer');
+var unfollowNumber = document.getElementById('unfollowNumber');
+var followNumber = document.getElementById('followNumber');
 var isPartOf, firstTime = false;
 
 prepare(); //Expected output: Pear goner, cucumber newer
@@ -42,6 +44,7 @@ function getLeavers() {
   for (i = 0; i < difference.length; i++) {
     leavers.innerHTML += i + 1 + ": " + difference[i].userName + "<br></td></tr><tr><td>";
   }
+  unfollowNumber.innerHTML = difference.length
 }
 
 function getJoiners() {
@@ -49,6 +52,7 @@ function getJoiners() {
   for (i = 0; i < difference.length; i++) {
     joiners.innerHTML += i + 1 + ": " + difference[i].userName + "<br></td><td>";
   }
+    followNumber.innerHTML = difference.length
 }
 
 var compareJSON = function(obj1, obj2) {
