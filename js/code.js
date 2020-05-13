@@ -17,7 +17,9 @@ prepare(); //Expected output: Pear goner, cucumber newer
 
 function prepare() {
   oldFollowList = JSON.parse(localStorage.getItem('previousList'));
-  previousFollowerTotal.innerHTML = "your previous amount of followers was <b>" + oldFollowList.length + "</b>";
+  if (oldFollowList != null) {
+    previousFollowerTotal.innerHTML = "your previous amount of followers was <b>" + oldFollowList.length + "</b>";
+  }
 }
 
 
@@ -35,16 +37,16 @@ function getLeavers() {
   console.log(difference);
   console.log(difference.length);
   for (i = 0; i < difference.length; i++) {
-    leavers.innerHTML += i + ": " + difference[i].userName + "<br>";
+    leavers.innerHTML += i + 1 + ": " + difference[i].userName + "<br></td></tr><tr><td>";
   }
 }
 
 function getJoiners() {
-  difference2 = compareJSON(newFollowList, oldFollowList);
+  difference = compareJSON(newFollowList, oldFollowList);
   console.log(difference);
   console.log(difference.length);
-  for (i = 0; i < difference2.length; i++) {
-    joiners.innerHTML += i + ": " + difference2[i].userName + "<br>";
+  for (i = 0; i < difference.length; i++) {
+    joiners.innerHTML += i + 1 + ": " + difference[i].userName + "<br></td><td>";
   }
 }
 
@@ -55,14 +57,12 @@ var compareJSON = function(obj1, obj2) {
   for (var i = 0; i < obj1.length; i++) {
     isPartOf = false;
     for (var j = 0; j < obj2.length; j++) {
-
       if (obj1[i].userName == obj2[j].userName) {
         isPartOf = true;
         continue;
       } else {
         c = i;
       }
-
     }
     if (!isPartOf) {
       res[b] = obj1[c]
@@ -72,11 +72,9 @@ var compareJSON = function(obj1, obj2) {
   return res;
 }
 
-
 function placeFileContent(target, file) {
   readFileContent(file).then(content => {
     target.value = content;
-
     newFollowList = csvJSON(content);
     localStorage.setItem('previousList', newFollowList.toString());
     newFollowList = JSON.parse(newFollowList);
