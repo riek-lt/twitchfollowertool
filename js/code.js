@@ -21,19 +21,15 @@ function prepare() {
   if (oldFollowList != null) {
     previousFollowerTotal.innerHTML = "your previous amount of followers was <b>" + oldFollowList.length + "</b>";
   } else {
-    console.log('firstTime is nu true');
     firstTime = true;
   }
 }
-
-
 
 function processing() {
   newFollowerTotal.innerHTML = "your new amount of followers was <b>" + newFollowList.length + "</b>";
   uploadBtn.style.display = 'none';
   if (firstTime) {
     newtimer.style.display = 'inline';
-    console.log('laat error zien');
   }
   getLeavers();
   getJoiners();
@@ -43,8 +39,6 @@ function processing() {
 function getLeavers() {
   // difference =  oldFollowList.userName.filter(x => newFollowList.userName.indexOf(x) === -1);
   difference = compareJSON(oldFollowList, newFollowList);
-  console.log(difference);
-  console.log(difference.length);
   for (i = 0; i < difference.length; i++) {
     leavers.innerHTML += i + 1 + ": " + difference[i].userName + "<br></td></tr><tr><td>";
   }
