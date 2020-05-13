@@ -8,4 +8,6 @@ textarea {
 }
 th, td, tr {
   border-bottom: 1px solid #ddd;
+  box-sizing: content-box;
+
 }

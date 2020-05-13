@@ -46,8 +46,6 @@ function getLeavers() {
 
 function getJoiners() {
   difference = compareJSON(newFollowList, oldFollowList);
-  console.log(difference);
-  console.log(difference.length);
   for (i = 0; i < difference.length; i++) {
     joiners.innerHTML += i + 1 + ": " + difference[i].userName + "<br></td><td>";
   }
