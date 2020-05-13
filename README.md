@@ -1,4 +1,4 @@
-# twitchfollowertool
+# Twitch (un)follower viewer
 Tool to compare follower lists to see who followed/unfollowed you. This tool uses the [Unfollower tool](https://twitch-tools.rootonline.de/followerlist_viewer.php) made by [@CommanderRoot](https://twitter.com/CommanderRoot) to analyze a streamer's follower list, and check for changes.
 
 ## Why was this made?
@@ -9,7 +9,7 @@ I am aware that honest followers/unfollowers are also tracker, but it is up to t
 HTML, CSS and Javascript. Didn't need more.
 
 # Authors
-All code and logic was written by me.
+All code and logic was written by [Riekelt](https://twitter.com/riek_lt)
 
 ## Acknowledgements
 The html template was "Editorial" found on [HTML5up.net](htmp5up.net). I am using this under the CCA 3.0 license
