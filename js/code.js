@@ -9,6 +9,8 @@ var previousFollowerTotal = document.getElementById('previousFollowerTotal');
 var newFollowerTotal = document.getElementById('newFollowerTotal');
 var leavers = document.getElementById('leavers');
 var joiners = document.getElementById('joiners');
+var tableDiv = document.getElementById('tableDiv');
+var uploadBtn = document.getElementById('uploadBtn');
 var isPartOf = false;
 
 prepare(); //Expected output: Pear goner, cucumber newer
@@ -21,8 +23,10 @@ function prepare() {
 
 function processing() {
   newFollowerTotal.innerHTML = "your new amount of followers was <b>" + newFollowList.length + "</b>";
+  uploadBtn.style.display = 'none';
   getLeavers();
   getJoiners();
+  tableDiv.style.display = 'inline';
 }
 
 function getLeavers() {
