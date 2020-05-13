@@ -11,7 +11,8 @@ var leavers = document.getElementById('leavers');
 var joiners = document.getElementById('joiners');
 var tableDiv = document.getElementById('tableDiv');
 var uploadBtn = document.getElementById('uploadBtn');
-var isPartOf = false;
+var newtimer = document.getElementById('newtimer');
+var isPartOf, firstTime = false;
 
 prepare(); //Expected output: Pear goner, cucumber newer
 
@@ -19,13 +20,21 @@ function prepare() {
   oldFollowList = JSON.parse(localStorage.getItem('previousList'));
   if (oldFollowList != null) {
     previousFollowerTotal.innerHTML = "your previous amount of followers was <b>" + oldFollowList.length + "</b>";
+  } else {
+    console.log('firstTime is nu true');
+    firstTime = true;
   }
 }
+
 
 
 function processing() {
   newFollowerTotal.innerHTML = "your new amount of followers was <b>" + newFollowList.length + "</b>";
   uploadBtn.style.display = 'none';
+  if (firstTime) {
+    newtimer.style.display = 'inline';
+    console.log('laat error zien');
+  }
   getLeavers();
   getJoiners();
   tableDiv.style.display = 'inline';
