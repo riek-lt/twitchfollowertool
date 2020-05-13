@@ -1,6 +1,6 @@
 var csvContents = [];
 var accountInfo = [];
-var i, j = 0;
+var i, j, b, c = 0;
 var newFollowList;
 var oldFollowList = "";
 var difference = {};
@@ -9,8 +9,9 @@ var previousFollowerTotal = document.getElementById('previousFollowerTotal');
 var newFollowerTotal = document.getElementById('newFollowerTotal');
 var leavers = document.getElementById('leavers');
 var joiners = document.getElementById('joiners');
+var isPartOf = false;
 
-prepare(); //Expected output: Pear goner, cucumber new
+prepare(); //Expected output: Pear goner, cucumber newer
 
 function prepare() {
   oldFollowList = JSON.parse(localStorage.getItem('previousList'));
@@ -27,6 +28,8 @@ function processing() {
 function getLeavers() {
   // difference =  oldFollowList.userName.filter(x => newFollowList.userName.indexOf(x) === -1);
   difference = compareJSON(oldFollowList, newFollowList);
+  console.log(difference);
+  console.log(difference.length);
   for (i = 0; i < difference.length; i++) {
     leavers.innerHTML += i + ": " + difference[i].userName + "<br>";
   }
@@ -34,14 +37,36 @@ function getLeavers() {
 
 function getJoiners() {
   difference2 = compareJSON(newFollowList, oldFollowList);
+  console.log(difference);
+  console.log(difference.length);
   for (i = 0; i < difference2.length; i++) {
     joiners.innerHTML += i + ": " + difference2[i].userName + "<br>";
   }
 }
 
 var compareJSON = function(obj1, obj2) {
-  return obj1.filter((i => a => a.userName !== obj2[i].userName || !++i)(0));
-};
+  var res = [];
+  b = 0;
+  // return obj1.filter((i => a => a.userName !== obj2[i].userName || !++i)(0));
+  for (var i = 0; i < obj1.length; i++) {
+    isPartOf = false;
+    for (var j = 0; j < obj2.length; j++) {
+
+      if (obj1[i].userName == obj2[j].userName) {
+        isPartOf = true;
+        continue;
+      } else {
+        c = i;
+      }
+
+    }
+    if (!isPartOf) {
+      res[b] = obj1[c]
+      b++;
+    }
+  }
+  return res;
+}
 
 
 function placeFileContent(target, file) {
