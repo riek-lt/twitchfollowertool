@@ -5,91 +5,98 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-	<head>
-		<title>Twitch Unfollower Tool by @Riek_lt</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+<head>
+	<title>Twitch Unfollower Tool by @Riek_lt</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+</head>
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
+<body class="is-preload">
 
-							<!-- Header -->
-								<header id="header">
-									<a href="index.html" class="logo">Twitch <strong>(un)follower</strong> tool</a>
-									<ul class="icons">
-										<li><a href="https://twitter.com/riek_lt" class="icon brands fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
-										<li><a href="https://twitch.tv/riekelt" class="icon brands fa-twitch" target="_blank"><span class="label">Twitch</span></a></li>
-										<li><a href="https://github.com/riek-lt" class="icon brands fa-github" target="_blank"><span class="label">Github</span></a></li>
-									</ul>
-								</header>
+	<!-- Wrapper -->
+	<div id="wrapper">
 
-							<!-- Content -->
-								<section>
-									<!-- <header class="main">
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+
+				<!-- Header -->
+				<header id="header">
+					<a href="index.html" class="logo">Twitch <strong>(un)follower</strong> tool</a>
+					<ul class="icons">
+						<li><a href="https://twitter.com/riek_lt" class="icon brands fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
+						<li><a href="https://twitch.tv/riekelt" class="icon brands fa-twitch" target="_blank"><span class="label">Twitch</span></a></li>
+						<li><a href="https://github.com/riek-lt" class="icon brands fa-github" target="_blank"><span class="label">Github</span></a></li>
+					</ul>
+				</header>
+
+				<!-- Content -->
+				<section>
+					<!-- <header class="main">
 										<h1>Generic</h1>
 									</header> -->
 
-									<div id="previousFollowerTotal"></div>
-								  <div id="newFollowerTotal">Upload a CSV to display your current follower count</div><br>
-								  <div id="uploadBtn">
-										<p>This website uses CSV files downloaded from <a href="https://twitch-tools.rootonline.de/followerlist_viewer.php" target="_blank">
-											Commander Root's followlist-viewer</a>. Simply fill in your name, and press "Export all as CSV"</p>
-								    <label for="input-file">Upload a file</label>
-								    <input type="file" id="input-file">
-								  </div>
-
-								  <div id="tableDiv" style="display:none;">
-								    <table id="tblOne" style="width:50%; float:left">
-								      <tr>
-								        <th>People who unfollowed you <div id="unfollowNumber"></div></th>
-								      </tr>
-								      <tr>
-								        <td><div id="leavers"></div></td>
-								      </tr>
-								    </table>
-								    <table id="tblTwo" style="width:50%; float:left">
-								      <tr>
-								        <th>People who followed you <div id="followNumber"></div></th>
-								      </tr>
-								      <tr>
-								        <td><div id="joiners"></div></td>
-								      </tr>
-								    </table>
-								  </div>
-
-								  <div id="newtimer" style="display:none;">
-								    <p>If you see this text, we didn't have any data from you. Come back later!</p>
-								    <p>If this isn't the first time, you might have cleared your saved data or are using another browser.
-								      A "fix" for this is uploading your old .csv file again</p>
-								      <button onClick="window.location.reload();">Refresh Page</button>
-								  </div>
-
-								  <textarea id="content-target" style="display:none;"></textarea>
-								</section>
-
-						</div>
+					<div id="previousFollowerTotal"></div>
+					<div id="newFollowerTotal">Upload a CSV to display your current follower count</div><br>
+					<div id="uploadBtn">
+						<p>This website uses CSV files downloaded from <a href="https://twitch-tools.rootonline.de/followerlist_viewer.php" target="_blank">
+								Commander Root's followlist-viewer</a>. Simply fill in your name, and press "Export all as CSV"</p>
+						<label for="input-file">Upload a file</label>
+						<input type="file" id="input-file">
 					</div>
 
-				<!-- Sidebar -->
-					<div id="sidebar">
-						<div class="inner">
+					<div id="tableDiv" style="display:none;">
+						<table id="leavers" style="width:50%; float:left">
+							<tr>
+								<th>People who unfollowed you <div id="unfollowNumber"></div>
+								</th>
+							</tr>
+						</table>
+						<table id="joiners" style="width:50%; float:left">
+							<tr>
+								<th>People who followed you <div id="followNumber"></div>
+								</th>
+							</tr>
+						</table>
+						<table id="namechangers" style="width:50%; float:left">
+							<tr>
+								<th>Name changers</th>
+							</tr>
+							<tr>
+								<th><b>from</b></th>
+								<th><b>to<div></div></b></th>
+							</tr>
+						</table>
+					</div>
 
-							<!-- Search -->
-								<!-- <section id="search" class="alt">
+					<div id="newtimer" style="display:none;">
+						<p>If you see this text, we didn't have any data from you. Come back later!</p>
+						<p>If this isn't the first time, you might have cleared your saved data or are using another browser.
+							A "fix" for this is uploading your old .csv file again</p>
+						<button onClick="window.location.reload();">Refresh Page</button>
+					</div>
+
+					<textarea id="content-target" style="display:none;"></textarea>
+				</section>
+
+			</div>
+		</div>
+
+		<!-- Sidebar -->
+		<div id="sidebar">
+			<div class="inner">
+
+				<!-- Search -->
+				<!-- <section id="search" class="alt">
 									<form method="post" action="#">
 										<input type="text" name="query" id="query" placeholder="Search" />
 									</form>
 								</section> -->
 
-							<!-- Menu -->
-								<!-- <nav id="menu">
+				<!-- Menu -->
+				<!-- <nav id="menu">
 									<header class="major">
 										<h2>Menu</h2>
 									</header>
@@ -123,67 +130,71 @@
 									</ul>
 								</nav> -->
 
-							<!-- Section -->
-								<section>
-									<header class="major">
-										<!-- <h2>Ante interdum</h2> -->
-									</header>
-									<div class="mini-posts">
-										<article>
-											<p>This webpage was made to see all the followbots that joined and with the intent to track whenever they would stop following. The intent is NOT to track your human followers.</p>
-										</article>
-										<article>
-											<p>This thing is inspired by <a href="https://twitch-tools.rootonline.de/index.php?" target="_blank">Commander Root's Twitch Tools</a>
-											who made a follower/unfollowing list on which the CSV's are powered. </p>
-										</article>
-										<article>
-											<p>The CSV files submitted are <u>not</u> uploaded to a remote server. Instead, every file is processed on your own device & uses local storage to "remember" your last data.</p>
-										</article>
-									</div>
-									<ul class="actions">
-										<li><a href="#" class="button">More</a></li>
-									</ul>
-								</section>
-
-							<!-- Section -->
-								<section>
-									<header class="major">
-										<h2>Get in touch</h2>
-									</header>
-									<ul class="contact">
-										<li class="icon solid fa-envelope"><a href="#">Riekelt@rieke.lt</a></li>
-										<li class="icon brands fa-twitter"><a href="https://twitter.com/riek_lt" > Riek_lt</a></li>
-										<li class="icon brands fa-twitch"><a href="https://twitch.tv/riekelt"> Riekelt</a></li>
-										<li class="icon brands fa-github"><a href="https://github.com/riek-lt"> Riek-lt</a></li>
-									</ul>
-								</section>
-
-							<!-- Footer -->
-								<footer id="footer">
-									<p class="copyright">&copy; Riekelt. All rights reserved.</p>
-								</footer>
-
-						</div>
+				<!-- Section -->
+				<section>
+					<header class="major">
+						<!-- <h2>Ante interdum</h2> -->
+					</header>
+					<div class="mini-posts">
+						<article>
+							<p>This webpage was made to see all the followbots that joined and with the intent to track whenever they would stop following. The intent is NOT to track your human followers.</p>
+						</article>
+						<article>
+							<p>This thing is inspired by <a href="https://twitch-tools.rootonline.de/index.php?" target="_blank">Commander Root's Twitch Tools</a>
+								who made a follower/unfollowing list on which the CSV's are powered. </p>
+						</article>
+						<article>
+							<p>The CSV files submitted are <u>not</u> uploaded to a remote server. Instead, every file is processed on your own device & uses local storage to "remember" your last data.</p>
+						</article>
 					</div>
+					<ul class="actions">
+						<li><a href="#" class="button">More</a></li>
+					</ul>
+				</section>
+
+				<!-- Section -->
+				<section>
+					<header class="major">
+						<h2>Get in touch</h2>
+					</header>
+					<ul class="contact">
+						<li class="icon solid fa-envelope"><a href="#">Riekelt@rieke.lt</a></li>
+						<li class="icon brands fa-twitter"><a href="https://twitter.com/riek_lt"> Riek_lt</a></li>
+						<li class="icon brands fa-twitch"><a href="https://twitch.tv/riekelt"> Riekelt</a></li>
+						<li class="icon brands fa-github"><a href="https://github.com/riek-lt"> Riek-lt</a></li>
+					</ul>
+				</section>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<p class="copyright">&copy; Riekelt. All rights reserved.</p>
+				</footer>
 
 			</div>
+		</div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-			  <script src="assets/js/code.js" type="text/javascript"></script>
-				<!-- Global site tag (gtag.js) - Google Analytics -->
-				<script async src="https://www.googletagmanager.com/gtag/js?id=UA-47139080-2"></script>
-				<script>
-				  window.dataLayer = window.dataLayer || [];
-				  function gtag(){dataLayer.push(arguments);}
-				  gtag('js', new Date());
+	</div>
 
-				  gtag('config', 'UA-166773156-1');
-				</script>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/code.js" type="text/javascript"></script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-47139080-2"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
 
-	</body>
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-166773156-1');
+	</script>
+
+</body>
+
 </html>

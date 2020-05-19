@@ -3,17 +3,19 @@ var accountInfo = [];
 var i, j, b, c = 0;
 var newFollowList;
 var oldFollowList = "";
-var difference = {};
-var difference2 = {};
+var difLeavers = {};
+var difJoiners = {};
+var isNameChanger = false;
 var previousFollowerTotal = document.getElementById('previousFollowerTotal');
 var newFollowerTotal = document.getElementById('newFollowerTotal');
-var leavers = document.getElementById('leavers');
-var joiners = document.getElementById('joiners');
+var leavers = document.querySelector('#leavers');
+var joiners = document.querySelector('#joiners');
 var tableDiv = document.getElementById('tableDiv');
 var uploadBtn = document.getElementById('uploadBtn');
 var newtimer = document.getElementById('newtimer');
 var unfollowNumber = document.getElementById('unfollowNumber');
 var followNumber = document.getElementById('followNumber');
+var nameChangers = document.querySelector('#namechangers');
 var isPartOf, firstTime = false;
 
 prepare(); //Expected output: Pear goner, cucumber newer
@@ -35,24 +37,46 @@ function processing() {
   }
   getLeavers();
   getJoiners();
+  findNameChangers();
   tableDiv.style.display = 'inline';
 }
 
 function getLeavers() {
   // difference =  oldFollowList.userName.filter(x => newFollowList.userName.indexOf(x) === -1);
-  difference = compareJSON(oldFollowList, newFollowList);
-  for (i = 0; i < difference.length; i++) {
-    leavers.innerHTML += i + 1 + ": " + difference[i].userName + "<br></td></tr><tr><td>";
+  difLeavers = compareJSON(oldFollowList, newFollowList);
+  unfollowNumber.innerHTML = difLeavers.length;
+  for (i = 0; i < difLeavers.length; i++) {
+    if (i % 2 == 1) {
+      leavers.innerHTML += "<tr class='goodrows'><td>" + (i + 1) + ": " + difLeavers[i].userName + "<br></td></tr>";
+    } else if (i % 2 == 0) {
+      leavers.innerHTML += "<tr class='oddrows'><td>" + (i + 1) + ": " + difLeavers[i].userName + "<br></td></tr>";
+    }
   }
-  unfollowNumber.innerHTML = difference.length
 }
 
 function getJoiners() {
-  difference = compareJSON(newFollowList, oldFollowList);
-  for (i = 0; i < difference.length; i++) {
-    joiners.innerHTML += i + 1 + ": " + difference[i].userName + "<br></td><td>";
+  difJoiners = compareJSON(newFollowList, oldFollowList);
+  followNumber.innerHTML = difJoiners.length;
+  for (i = 0; i < difJoiners.length; i++) {
+    if (i % 2 == 1) {
+      joiners.innerHTML += "<tr class='goodrows'><td>" + (i + 1) + ": " + difJoiners[i].userName + "<br></td></tr>";
+    } else if (i % 2 == 0) {
+      joiners.innerHTML += "<tr class='oddrows'><td>" + (i + 1) + ": " + difJoiners[i].userName + "<br></td></tr>";
+    }
   }
-    followNumber.innerHTML = difference.length
+}
+
+function findNameChangers() {
+  isNameChanger = false;
+  for (var i = 0; i < difLeavers.length; i++) {
+    for (var j = 0; j < difJoiners.length; j++) {
+      if (difLeavers[i].userID == difJoiners[j].userID) {
+        nameChangers.style.display = 'inline';
+        nameChangers.innerHTML += "<tr><td>" + difLeavers[i].userName + "</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + difJoiners[j].userName + "</td></tr>";
+      }
+    }
+  }
+
 }
 
 var compareJSON = function(obj1, obj2) {

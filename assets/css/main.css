@@ -1451,6 +1451,11 @@ table {
     border-right: 0; }
     table tbody tr:nth-child(2n + 1) {
       background-color: rgba(230, 235, 237, 0.25); }
+    .oddrows {
+      background-color: rgba(255, 255, 255, 0.25); }
+    .goodrows {
+      background-color: rgba(255, 255, 255, 0); }
+      }
   table td {
     padding: 0.75em 0.75em; }
   table th {
