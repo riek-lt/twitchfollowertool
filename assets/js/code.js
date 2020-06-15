@@ -3,8 +3,8 @@ var accountInfo = [];
 var i, j, b, c = 0;
 var newFollowList;
 var oldFollowList = "";
-var difLeavers = {};
-var difJoiners = {};
+var difLeavers = [];
+var difJoiners = [];
 var isNameChanger = false;
 var previousFollowerTotal = document.getElementById('previousFollowerTotal');
 var newFollowerTotal = document.getElementById('newFollowerTotal');
@@ -17,6 +17,8 @@ var unfollowNumber = document.getElementById('unfollowNumber');
 var followNumber = document.getElementById('followNumber');
 var nameChangers = document.querySelector('#namechangers');
 var isPartOf, firstTime = false;
+var row;
+var cell, cell2;
 
 prepare(); //Expected output: Pear goner, cucumber newer
 
@@ -46,11 +48,10 @@ function getLeavers() {
   difLeavers = compareJSON(oldFollowList, newFollowList);
   unfollowNumber.innerHTML = difLeavers.length;
   for (i = 0; i < difLeavers.length; i++) {
-    if (i % 2 == 1) {
-      leavers.innerHTML += "<tr class='goodrows'><td>" + (i + 1) + ": " + difLeavers[i].userName + "<br></td></tr>";
-    } else if (i % 2 == 0) {
-      leavers.innerHTML += "<tr class='oddrows'><td>" + (i + 1) + ": " + difLeavers[i].userName + "<br></td></tr>";
-    }
+      row = leavers.insertRow(i+1);
+      cell = row.insertCell(0);
+      cell.innerHTML = i+1 + ": " + difLeavers[i].userName;
+
   }
 }
 
@@ -58,11 +59,9 @@ function getJoiners() {
   difJoiners = compareJSON(newFollowList, oldFollowList);
   followNumber.innerHTML = difJoiners.length;
   for (i = 0; i < difJoiners.length; i++) {
-    if (i % 2 == 1) {
-      joiners.innerHTML += "<tr class='goodrows'><td>" + (i + 1) + ": " + difJoiners[i].userName + "<br></td></tr>";
-    } else if (i % 2 == 0) {
-      joiners.innerHTML += "<tr class='oddrows'><td>" + (i + 1) + ": " + difJoiners[i].userName + "<br></td></tr>";
-    }
+    row = joiners.insertRow(i+1);
+    cell = row.insertCell(0);
+    cell.innerHTML = i+1 + ": " + difJoiners[i].userName;
   }
 }
 
@@ -72,7 +71,12 @@ function findNameChangers() {
     for (var j = 0; j < difJoiners.length; j++) {
       if (difLeavers[i].userID == difJoiners[j].userID) {
         nameChangers.style.display = 'inline';
-        nameChangers.innerHTML += "<tr><td>" + difLeavers[i].userName + "</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + difJoiners[j].userName + "</td></tr>";
+        row = nameChangers.insertRow(i);
+        cell = row.insertCell(0);
+        cell2 = row.insertCell(1);
+        cell.innerHTML = difLeavers[i].userName;
+        cell2.innerHTML = difJoiners[j].userName;
+        // nameChangers.innerHTML += "<tr><td>" + difLeavers[i].userName + "</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + difJoiners[j].userName + "</td></tr>";
       }
     }
   }
