@@ -1,10 +1,10 @@
 var csvContents = [];
 var accountInfo = [];
-var i, j, b, c = 0;
+var i, j, b, c, k = 0;
 var newFollowList;
 var oldFollowList = "";
-var difLeavers = [];
-var difJoiners = [];
+var difLeavers, difLeaverList = [];
+var difJoiners, difJoinerList = [];
 var isNameChanger = false;
 var previousFollowerTotal = document.getElementById('previousFollowerTotal');
 var newFollowerTotal = document.getElementById('newFollowerTotal');
@@ -37,31 +37,41 @@ function processing() {
   if (firstTime) {
     newtimer.style.display = 'inline';
   }
+  getNames();
+  findNameChangers();
   getLeavers();
   getJoiners();
-  findNameChangers();
   tableDiv.style.display = 'inline';
 }
 
-function getLeavers() {
-  // difference =  oldFollowList.userName.filter(x => newFollowList.userName.indexOf(x) === -1);
+function getNames() {
   difLeavers = compareJSON(oldFollowList, newFollowList);
+  difJoiners = compareJSON(newFollowList, oldFollowList);
+}
+
+function getLeavers() {
+  k=0;
   unfollowNumber.innerHTML = difLeavers.length;
   for (i = 0; i < difLeavers.length; i++) {
-      row = leavers.insertRow(i+1);
+    if (!inArray(difLeavers[i].userName, difLeaverList)) {
+      k++;
+      row = leavers.insertRow(-1);
       cell = row.insertCell(0);
-      cell.innerHTML = i+1 + ": " + difLeavers[i].userName;
-
+      cell.innerHTML = k + ": " + difLeavers[i].userName;
+    }
   }
 }
 
 function getJoiners() {
-  difJoiners = compareJSON(newFollowList, oldFollowList);
+  k=0;
   followNumber.innerHTML = difJoiners.length;
   for (i = 0; i < difJoiners.length; i++) {
-    row = joiners.insertRow(i+1);
-    cell = row.insertCell(0);
-    cell.innerHTML = i+1 + ": " + difJoiners[i].userName;
+    if (!inArray(difJoiners[i].userName, difJoinerList)) {
+      k++;
+      row = joiners.insertRow(-1);
+      cell = row.insertCell(0);
+      cell.innerHTML = k + ": " + difJoiners[i].userName;
+    }
   }
 }
 
@@ -70,17 +80,27 @@ function findNameChangers() {
   for (var i = 0; i < difLeavers.length; i++) {
     for (var j = 0; j < difJoiners.length; j++) {
       if (difLeavers[i].userID == difJoiners[j].userID) {
+        k++;
         nameChangers.style.display = 'inline';
-        row = nameChangers.insertRow(i);
+        row = nameChangers.insertRow(k + 1);
         cell = row.insertCell(0);
         cell2 = row.insertCell(1);
         cell.innerHTML = difLeavers[i].userName;
         cell2.innerHTML = difJoiners[j].userName;
-        // nameChangers.innerHTML += "<tr><td>" + difLeavers[i].userName + "</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + difJoiners[j].userName + "</td></tr>";
+        difLeaverList.push(difLeavers[i].userName);
+        difJoinerList.push(difJoiners[j].userName);
       }
     }
   }
+}
 
+function inArray(needle, haystack) {
+  for (var i = 0; i < haystack.length; i++) {
+    if (haystack[i] === needle) {
+      return true;
+    }
+  }
+  return false;
 }
 
 var compareJSON = function(obj1, obj2) {
