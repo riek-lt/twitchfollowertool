@@ -51,7 +51,6 @@ function getNames() {
 
 function getLeavers() {
   k=0;
-  unfollowNumber.innerHTML = difLeavers.length;
   for (i = 0; i < difLeavers.length; i++) {
     if (!inArray(difLeavers[i].userName, difLeaverList)) {
       k++;
@@ -60,11 +59,11 @@ function getLeavers() {
       cell.innerHTML = k + ": " + difLeavers[i].userName;
     }
   }
+    unfollowNumber.innerHTML = k;
 }
 
 function getJoiners() {
   k=0;
-  followNumber.innerHTML = difJoiners.length;
   for (i = 0; i < difJoiners.length; i++) {
     if (!inArray(difJoiners[i].userName, difJoinerList)) {
       k++;
@@ -73,6 +72,7 @@ function getJoiners() {
       cell.innerHTML = k + ": " + difJoiners[i].userName;
     }
   }
+    followNumber.innerHTML = k;
 }
 
 function findNameChangers() {
