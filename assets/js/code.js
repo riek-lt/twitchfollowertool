@@ -24,7 +24,7 @@ var isPartOf, firstTime = false;
 var row;
 var cell, cell2;
 
-prepare(); //Expected output: Pear goner, cucumber newer
+prepare();
 
 function prepare() {
   //Loads previous save data
@@ -33,6 +33,7 @@ function prepare() {
   if (oldFollowList != null) {
     previousFollowerTotal.innerHTML = "your previous amount of followers was <b>" + oldFollowList.length + "</b>";
   } else {
+    //enable firstTime if there is no prior savedata stored.
     firstTime = true;
   }
   //Loads previous username, if any is set
@@ -46,27 +47,32 @@ function prepare() {
 }
 
 function useTwitchImport() {
+  //Useless function, thought there'd be more stuff here. Will point it directly to getUserForUsername() later.
   getUserForUsername(ownUsername);
 }
 
+//This will process the differences in the list.
 function processing() {
   newFollowerTotal.innerHTML = "your new amount of followers was <b>" + newFollowList.length + "</b>";
   uploadBtn.style.display = 'none';
   if (firstTime) {
+    //Displays the first-time message
     newtimer.style.display = 'inline';
   }
-  getNames(method);
+  populateDifs(); //Function to populate the lists with accounts that unfollowed and followed ahead of time.
   findNameChangers();
   getLeavers();
   getJoiners();
-  tableDiv.style.display = 'inline';
+  tableDiv.style.display = 'inline'; //Makes the filled-in table show up in 1 go.
 }
 
-function getNames() {
+function populateDifs() {
   difLeavers = compareJSON(oldFollowList, newFollowList);
   difJoiners = compareJSON(newFollowList, oldFollowList);
 }
 
+//This function throws all the unfollowers in a list. Accounts that did a namechange
+//are removed with inArray since people who change name are seen as unfollowers.
 function getLeavers() {
   k = 0;
   for (i = 0; i < difLeavers.length; i++) {
@@ -80,6 +86,7 @@ function getLeavers() {
   unfollowNumber.innerHTML = k;
 }
 
+//Similar to getLeavers()
 function getJoiners() {
   k = 0;
   for (i = 0; i < difJoiners.length; i++) {
@@ -93,6 +100,8 @@ function getJoiners() {
   followNumber.innerHTML = k;
 }
 
+//Show people who changed their name by comparing userID's from followers and unfollowers.
+//This was made since it showed a lot of false positives, and thus made this extra fun table.
 function findNameChangers() {
   isNameChanger = false;
   for (var i = 0; i < difLeavers.length; i++) {
@@ -112,6 +121,7 @@ function findNameChangers() {
   }
 }
 
+//Used to check if any unfollowers changed their name.
 function inArray(needle, haystack) {
   for (var i = 0; i < haystack.length; i++) {
     if (haystack[i] === needle) {
@@ -121,6 +131,8 @@ function inArray(needle, haystack) {
   return false;
 }
 
+//This function checks if the username of 1 is in the other. If it is NOT,
+//it returns it to a separate obj array.
 var compareJSON = function(obj1, obj2) {
   var res = [];
   b = 0;
@@ -165,8 +177,9 @@ function placeFileContent(target, file) {
     processing();
   }).catch(error => console.log(error))
 }
-//Don't actually do stuff beneath this line
 
+//Don't actually do stuff beneath this line, breaks upload logic.
+//-----------------------------------------------------------------
 function readFileContent(file) {
   const reader = new FileReader()
   return new Promise((resolve, reject) => {
@@ -188,6 +201,7 @@ function getFile(event) {
   }
 }
 
+//Somehow grabs a CSV and turns it into a json
 function csvJSON(csv) {
   let lines = csv.split("\n");
   let result = [];
