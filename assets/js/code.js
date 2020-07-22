@@ -11,6 +11,7 @@ var previousFollowerTotal = document.getElementById('previousFollowerTotal');
 var savedUsername = document.getElementById('savedUsername');
 var newFollowerTotal = document.getElementById('newFollowerTotal');
 var twitchNameInsert = document.querySelector('#twitchNameInsert');
+var useTwitch = document.querySelector('#useTwitch');
 var leavers = document.querySelector('#leavers');
 var joiners = document.querySelector('#joiners');
 var tableDiv = document.getElementById('tableDiv');
@@ -23,32 +24,38 @@ var isPartOf, firstTime = false;
 var row;
 var cell, cell2;
 
-// getUserForUsername("riekelt");
-
 prepare(); //Expected output: Pear goner, cucumber newer
 
 function prepare() {
+  //Loads previous save data
+  console.log(localStorage.getItem('previousList'));
   oldFollowList = JSON.parse(localStorage.getItem('previousList'));
   if (oldFollowList != null) {
     previousFollowerTotal.innerHTML = "your previous amount of followers was <b>" + oldFollowList.length + "</b>";
   } else {
     firstTime = true;
   }
+  //Loads previous username, if any is set
   ownUsername = localStorage.getItem('userName');
-  console.log();
   if (ownUsername != null) {
     savedUsername.innerHTML = "your current username is set to <b>" + ownUsername + "</b>. You can remove your name by <a href='javascript:removeSavedUsername()'>clicking here.</a> (Refreshes the page)";
     twitchNameInsert.style.display = "none";
+  } else {
+    useTwitch.style.display = "none";
   }
 }
 
-function processing() {
+function useTwitchImport() {
+  getUserForUsername(ownUsername);
+}
+
+function processing(method) {
   newFollowerTotal.innerHTML = "your new amount of followers was <b>" + newFollowList.length + "</b>";
   uploadBtn.style.display = 'none';
   if (firstTime) {
     newtimer.style.display = 'inline';
   }
-  getNames();
+  getNames(method);
   findNameChangers();
   getLeavers();
   getJoiners();
@@ -155,7 +162,7 @@ function placeFileContent(target, file) {
     newFollowList = csvJSON(content);
     localStorage.setItem('previousList', newFollowList.toString());
     newFollowList = JSON.parse(newFollowList);
-    processing();
+    processing("CSV");
   }).catch(error => console.log(error))
 }
 //Don't actually do stuff beneath this line
