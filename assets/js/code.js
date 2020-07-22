@@ -20,7 +20,9 @@ var isPartOf, firstTime = false;
 var row;
 var cell, cell2;
 
-prepare(); //Expected output: Pear goner, cucumber newer
+getUserForUsername("riekelt");
+
+// prepare(); //Expected output: Pear goner, cucumber newer
 
 function prepare() {
   oldFollowList = JSON.parse(localStorage.getItem('previousList'));
