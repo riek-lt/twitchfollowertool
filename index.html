@@ -41,11 +41,18 @@
 
 					<div id="previousFollowerTotal"></div>
 					<div id="newFollowerTotal">Upload a CSV to display your current follower count</div><br>
+					<div id="savedUsername"><br></div><br>
 					<div id="uploadBtn">
 						<p>This website uses CSV files downloaded from <a href="https://twitch-tools.rootonline.de/followerlist_viewer.php" target="_blank">
 								Commander Root's followlist-viewer</a>. Simply fill in your name, and press "Export all as CSV"</p>
 						<label for="input-file">Upload a file</label>
 						<input type="file" id="input-file">
+					</div>
+					<div id="twitchNameInsert" style="padding-top: 40px;">
+						<form id="nameForm">
+						  Twitch name: <input type="text" name="fname" style="width:50%;"><br>
+						  <input type="submit" value="Submit" onClick="insertUsername()">
+						</form>
 					</div>
 					<div id="status"></div>
 					<div id="content"></div>

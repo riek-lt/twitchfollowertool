@@ -3,11 +3,14 @@ var accountInfo = [];
 var i, j, b, c, k = 0;
 var newFollowList;
 var oldFollowList = "";
+var ownUsername = "";
 var difLeavers, difLeaverList = [];
 var difJoiners, difJoinerList = [];
 var isNameChanger = false;
 var previousFollowerTotal = document.getElementById('previousFollowerTotal');
+var savedUsername = document.getElementById('savedUsername');
 var newFollowerTotal = document.getElementById('newFollowerTotal');
+var twitchNameInsert = document.querySelector('#twitchNameInsert');
 var leavers = document.querySelector('#leavers');
 var joiners = document.querySelector('#joiners');
 var tableDiv = document.getElementById('tableDiv');
@@ -20,9 +23,9 @@ var isPartOf, firstTime = false;
 var row;
 var cell, cell2;
 
-getUserForUsername("riekelt");
+// getUserForUsername("riekelt");
 
-// prepare(); //Expected output: Pear goner, cucumber newer
+prepare(); //Expected output: Pear goner, cucumber newer
 
 function prepare() {
   oldFollowList = JSON.parse(localStorage.getItem('previousList'));
@@ -30,6 +33,12 @@ function prepare() {
     previousFollowerTotal.innerHTML = "your previous amount of followers was <b>" + oldFollowList.length + "</b>";
   } else {
     firstTime = true;
+  }
+  ownUsername = localStorage.getItem('userName');
+  console.log();
+  if (ownUsername != null) {
+    savedUsername.innerHTML = "your current username is set to <b>" + ownUsername + "</b>. You can remove your name by <a href='javascript:removeSavedUsername()'>clicking here.</a> (Refreshes the page)";
+    twitchNameInsert.style.display = "none";
   }
 }
 
@@ -52,7 +61,7 @@ function getNames() {
 }
 
 function getLeavers() {
-  k=0;
+  k = 0;
   for (i = 0; i < difLeavers.length; i++) {
     if (!inArray(difLeavers[i].userName, difLeaverList)) {
       k++;
@@ -61,11 +70,11 @@ function getLeavers() {
       cell.innerHTML = k + ": " + difLeavers[i].userName;
     }
   }
-    unfollowNumber.innerHTML = k;
+  unfollowNumber.innerHTML = k;
 }
 
 function getJoiners() {
-  k=0;
+  k = 0;
   for (i = 0; i < difJoiners.length; i++) {
     if (!inArray(difJoiners[i].userName, difJoinerList)) {
       k++;
@@ -74,7 +83,7 @@ function getJoiners() {
       cell.innerHTML = k + ": " + difJoiners[i].userName;
     }
   }
-    followNumber.innerHTML = k;
+  followNumber.innerHTML = k;
 }
 
 function findNameChangers() {
@@ -125,6 +134,19 @@ var compareJSON = function(obj1, obj2) {
     }
   }
   return res;
+}
+
+function insertUsername() {
+  var nameInput = document.getElementById('nameForm').elements.item(0).value;
+  localStorage.setItem('userName', nameInput);
+  location.reload;
+}
+
+function removeSavedUsername() {
+  location.reload;
+  localStorage.removeItem('userName');
+  window.location.reload(true);
+  return false;
 }
 
 function placeFileContent(target, file) {
