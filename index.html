@@ -3,6 +3,7 @@
 	Editorial by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	https://api.twitch.tv/kraken/channels/26082881/follows?client_id=mousewafn9w2sq0fog52kmq0ndh8ch&api_version=5&limit=100&offset=800
 -->
 <html>
 
@@ -40,12 +41,23 @@
 
 					<div id="previousFollowerTotal"></div>
 					<div id="newFollowerTotal">Upload a CSV to display your current follower count</div><br>
+					<div id="savedUsername"><br></div><br>
+					<p>This website uses CSV files downloaded from <a href="https://twitch-tools.rootonline.de/followerlist_viewer.php" target="_blank">
+							Commander Root's followlist-viewer</a>. Simply fill in your name, and press "Export all as CSV". <br>Next to that, we can download it directly from Twitch. fill in your name and press "Use Twitch Import".</p>
+
+					<div id="useTwitch" style="padding-top:40px;"><button onClick="useTwitchImport()">Use Twitch Import</button></div>
+					<div id="twitchNameInsert" style="padding-top: 40px;">
+						<form id="nameForm">
+						  Twitch name: <input type="text" name="fname" style="width:50%;"><br>
+						  <input type="submit" value="Submit" onClick="insertUsername()">
+						</form>
+					</div>
 					<div id="uploadBtn">
-						<p>This website uses CSV files downloaded from <a href="https://twitch-tools.rootonline.de/followerlist_viewer.php" target="_blank">
-								Commander Root's followlist-viewer</a>. Simply fill in your name, and press "Export all as CSV"</p>
 						<label for="input-file">Upload a file</label>
 						<input type="file" id="input-file">
 					</div>
+					<div id="status"></div>
+					<div id="content"></div>
 
 					<div id="tableDiv" style="display:none;">
 						<table id="leavers" style="width:50%; float:left">
@@ -182,6 +194,7 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
+	<script src="assets/js/croot.js" type="text/javascript"></script>
 	<script src="assets/js/code.js" type="text/javascript"></script>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-47139080-2"></script>
