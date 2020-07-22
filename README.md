@@ -9,7 +9,8 @@ I am aware that honest followers/unfollowers are also tracker, but it is up to t
 HTML, CSS and Javascript. Didn't need more.
 
 # Authors
-All code and logic was written by [Riekelt](https://twitter.com/riek_lt)
+Most main code and logic was written by [Riekelt](https://twitter.com/riek_lt)
 
 ## Acknowledgements
+The integrated twitch fetcher uses the same logic as [@CommanderRoot](https://twitter.com/CommanderRoot)'s follower-list fetcher. 
 The html template was "Editorial" found on [HTML5up.net](htmp5up.net). I am using this under the CCA 3.0 license
