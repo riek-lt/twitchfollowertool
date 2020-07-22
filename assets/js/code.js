@@ -49,7 +49,7 @@ function useTwitchImport() {
   getUserForUsername(ownUsername);
 }
 
-function processing(method) {
+function processing() {
   newFollowerTotal.innerHTML = "your new amount of followers was <b>" + newFollowList.length + "</b>";
   uploadBtn.style.display = 'none';
   if (firstTime) {
@@ -162,7 +162,7 @@ function placeFileContent(target, file) {
     newFollowList = csvJSON(content);
     localStorage.setItem('previousList', newFollowList.toString());
     newFollowList = JSON.parse(newFollowList);
-    processing("CSV");
+    processing();
   }).catch(error => console.log(error))
 }
 //Don't actually do stuff beneath this line

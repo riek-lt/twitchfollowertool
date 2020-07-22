@@ -93,7 +93,7 @@ function getFollowersFromAPI(cursor) {
           console.log(JSON.stringify(followerList));
           localStorage.setItem('previousList', JSON.stringify(followerList));
           newFollowList = followerList;
-          processing("twitch");
+          processing();
 
           $('#status').empty();
         }
