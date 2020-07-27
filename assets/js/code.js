@@ -81,7 +81,7 @@ function getLeavers() {
       k++;
       row = leavers.insertRow(-1);
       cell = row.insertCell(0);
-      cell.innerHTML = k + ": " + difLeavers[i].userName;
+      cell.innerHTML = k + ': <a href="http://twitch.tv/' + difLeavers[i].userName + '" target="_blank">' + difLeavers[i].userName + '</a>';
     }
   }
   unfollowNumber.innerHTML = k;
@@ -95,7 +95,7 @@ function getJoiners() {
       k++;
       row = joiners.insertRow(-1);
       cell = row.insertCell(0);
-      cell.innerHTML = k + ": " + difJoiners[i].userName;
+      cell.innerHTML = k + ': <a href="http://twitch.tv/' + difJoiners[i].userName + '" target="_blank">' + difJoiners[i].userName + '</a>';
     }
   }
   followNumber.innerHTML = k;
