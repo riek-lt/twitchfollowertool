@@ -55,6 +55,7 @@ function useTwitchImport() {
 function processing() {
   newFollowerTotal.innerHTML = "your new amount of followers was <b>" + newFollowList.length + "</b>";
   uploadBtn.style.display = 'none';
+  useTwitch.style.display = 'none';
   if (firstTime) {
     //Displays the first-time message
     newtimer.style.display = 'inline';
