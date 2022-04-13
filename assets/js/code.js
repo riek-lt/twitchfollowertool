@@ -28,7 +28,7 @@ prepare();
 
 function prepare() {
   //Loads previous save data
-  console.log(localStorage.getItem('previousList'));
+  // console.log(localStorage.getItem('previousList'));
   oldFollowList = JSON.parse(localStorage.getItem('previousList'));
   if (oldFollowList != null) {
     previousFollowerTotal.innerHTML = "your previous amount of followers was <b>" + oldFollowList.length + "</b>";
@@ -55,7 +55,7 @@ function useTwitchImport() {
 function processing() {
   newFollowerTotal.innerHTML = "your new amount of followers was <b>" + newFollowList.length + "</b>";
   uploadBtn.style.display = 'none';
-  useTwitch.style.display = 'none';
+  // useTwitch.style.display = 'none';
   if (firstTime) {
     //Displays the first-time message
     newtimer.style.display = 'inline';
